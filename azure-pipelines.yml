@@ -34,7 +34,7 @@ variables:
     value: '0'
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: SelfHostedPool   # Microsoft-hosted parallelism not granted; self-hosted WSL agent
 
 stages:
 # ---------------------------------------------------------------------------
@@ -53,7 +53,10 @@ stages:
         cd "$(Agent.TempDirectory)"
         curl -fsSL -o tf.zip "https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip"
         unzip -o -q tf.zip -d tfbin
-        sudo install -m 0755 tfbin/terraform /usr/local/bin/terraform
+        mkdir -p "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
+        install -m 0755 tfbin/terraform "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)/terraform"
+        export PATH="$(Agent.ToolsDirectory)/terraform/$(terraformVersion):$PATH"
+        echo "##vso[task.prependpath]$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
         terraform version
       displayName: 'Install Terraform $(terraformVersion)'
 
@@ -96,7 +99,10 @@ stages:
         cd "$(Agent.TempDirectory)"
         curl -fsSL -o tf.zip "https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip"
         unzip -o -q tf.zip -d tfbin
-        sudo install -m 0755 tfbin/terraform /usr/local/bin/terraform
+        mkdir -p "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
+        install -m 0755 tfbin/terraform "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)/terraform"
+        export PATH="$(Agent.ToolsDirectory)/terraform/$(terraformVersion):$PATH"
+        echo "##vso[task.prependpath]$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
         terraform version
       displayName: 'Install Terraform $(terraformVersion)'
 
@@ -146,7 +152,10 @@ stages:
               cd "$(Agent.TempDirectory)"
               curl -fsSL -o tf.zip "https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip"
               unzip -o -q tf.zip -d tfbin
-              sudo install -m 0755 tfbin/terraform /usr/local/bin/terraform
+              mkdir -p "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
+              install -m 0755 tfbin/terraform "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)/terraform"
+              export PATH="$(Agent.ToolsDirectory)/terraform/$(terraformVersion):$PATH"
+              echo "##vso[task.prependpath]$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
               terraform version
             displayName: 'Install Terraform $(terraformVersion)'
 
@@ -188,7 +197,10 @@ stages:
         cd "$(Agent.TempDirectory)"
         curl -fsSL -o tf.zip "https://releases.hashicorp.com/terraform/$(terraformVersion)/terraform_$(terraformVersion)_linux_amd64.zip"
         unzip -o -q tf.zip -d tfbin
-        sudo install -m 0755 tfbin/terraform /usr/local/bin/terraform
+        mkdir -p "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
+        install -m 0755 tfbin/terraform "$(Agent.ToolsDirectory)/terraform/$(terraformVersion)/terraform"
+        export PATH="$(Agent.ToolsDirectory)/terraform/$(terraformVersion):$PATH"
+        echo "##vso[task.prependpath]$(Agent.ToolsDirectory)/terraform/$(terraformVersion)"
       displayName: 'Install Terraform $(terraformVersion)'
 
     - script: |
