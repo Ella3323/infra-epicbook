@@ -14,4 +14,4 @@ app_port             = 8080
 db_name              = "bookstore"
 db_instance_class    = "db.t3.micro"
 mysql_engine_version = "8.0"
-admin_cidrs          = ["102.90.100.84/32"]
+admin_cidrs          = ["102.90.98.183/32"]
