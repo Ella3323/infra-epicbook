@@ -2,7 +2,7 @@
 # db_admin_username / db_admin_password are NEVER here:
 # locally they come from TF_VAR_ env vars, in the pipeline from the secret variable group.
 aws_region           = "us-east-1"
-project_name         = "epicbook"
+project_name         = "epicbook-a04"
 owner                = "Ella"
 vpc_cidr             = "10.20.0.0/16"
 frontend_subnet_cidr = "10.20.1.0/24"
